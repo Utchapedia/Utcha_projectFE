@@ -1,25 +1,36 @@
 {
-  "api/movies": [
+  "movies": [
     {
-      "image": "url",
-      "name": "범죄도시2",
-      "year": "2022 · 한국",
-      "score": 3,
-      "book": "예매율16%"
-    },
-    {
-      "image": "url",
-      "name": "탑건2:매버릭",
-      "year": "2022 · 미국",
-      "score": 2,
-      "book": "예매율20%"
-    },
-    {
-      "image": "url",
-      "name": "마녀2",
-      "year": "2021 · 한국",
-      "score": 2,
-      "book": "예매율35%"
+      "movies": [
+        {
+          "originalTitle": "https://an2-img.amz.wtchn.net/image/v2/A_2H7CpybTzRqcjyuIGjew.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk5URTFOREEzTWpReU5qRTJNemsxTkRZaWZRLmkxX1BMT2hqUGxQSzlWYVZPdVN2QUJ4eW0ydDBCbGpiaGQ2cWxRUTZubEE",
+          "title": "영화제목1",
+          "year": "2022",
+          "country": "한국",
+          "star": 3
+        },
+        {
+          "originalTitle": "https://an2-img.amz.wtchn.net/image/v2/A_2H7CpybTzRqcjyuIGjew.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk5URTFOREEzTWpReU5qRTJNemsxTkRZaWZRLmkxX1BMT2hqUGxQSzlWYVZPdVN2QUJ4eW0ydDBCbGpiaGQ2cWxRUTZubEE",
+          "title": "영화제목",
+          "year": "2022",
+          "country": "미국",
+          "star": 4
+        },
+        {
+          "originalTitle": "https://an2-img.amz.wtchn.net/image/v2/A_2H7CpybTzRqcjyuIGjew.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk5URTFOREEzTWpReU5qRTJNemsxTkRZaWZRLmkxX1BMT2hqUGxQSzlWYVZPdVN2QUJ4eW0ydDBCbGpiaGQ2cWxRUTZubEE",
+          "title": "영화제목1",
+          "year": "2022",
+          "country": "중국",
+          "star": 2.5
+        },
+        {
+          "originalTitle": "https://an2-img.amz.wtchn.net/image/v2/A_2H7CpybTzRqcjyuIGjew.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk5URTFOREEzTWpReU5qRTJNemsxTkRZaWZRLmkxX1BMT2hqUGxQSzlWYVZPdVN2QUJ4eW0ydDBCbGpiaGQ2cWxRUTZubEE",
+          "title": "영화제목1",
+          "year": "2022",
+          "country": "한국",
+          "star": 4
+        }
+      ]
     }
   ]
 }

@@ -1,8 +1,26 @@
 import React from 'react';
-import './App.css';
+import { useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
+import Main from './pages/Main';
+import { loadMovieListDB } from './redux/modules/movieList';
 
 function App() {
-  return <div className='App'></div>;
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(loadMovieListDB());
+  }, []);
+
+  return (
+    <div className='App'>
+      <Header />
+
+      <Routes>
+        <Route path='/' element={<Main />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
