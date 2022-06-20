@@ -5,6 +5,8 @@ import Header from './components/Header';
 import Main from './pages/Main';
 import { loadMovieListDB } from './redux/modules/movieList';
 
+import Detail from "./pages/Detail";
+
 function App() {
   const dispatch = useDispatch();
 
@@ -18,6 +20,7 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Main />} />
+        <Route path="/detail" element={<Detail />}></Route>
       </Routes>
     </div>
   );
