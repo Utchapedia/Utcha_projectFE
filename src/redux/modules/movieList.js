@@ -1,5 +1,4 @@
 // movieList.js
-import instance from '../../shared/Request';
 import { movieListApi } from '../../shared/api';
 
 // Actions

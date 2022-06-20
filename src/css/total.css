@@ -1,0 +1,14 @@
+.inner-set {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 100px;
+  box-sizing: border-box;
+}
+
+.font-color-black {
+  color: #292a32;
+}
+
+.font-color-gray {
+  color: #787878;
+}
