@@ -2,10 +2,11 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import movieList from './modules/movieList';
+import commentModule from './modules/commentModule';
 
 const middlewares = [thunk];
 
-const rootReducer = combineReducers({ movieList });
+const rootReducer = combineReducers({ movieList, commentModule });
 
 const enhancer = applyMiddleware(...middlewares);
 

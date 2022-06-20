@@ -1,18 +1,21 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from 'react-redux';
+import {useParams} from "react-router-dom";
 
 //components
 import Banner from "../components/Banner";
-import MovieInfo from "../components/MovieInfo";
-import Comment from "../components/Comment";
+import MovieInfoComment from "../components/MovieInfoComment";
+
 
 const Detail= (props) => {   
+  const {postId} = useParams();
+  
+
 return(
      <Container>
-       <Banner style= {{backgroundColor: "#ddd"}} />
-        <MovieInfo />
-        
-        <Comment />
+       <Banner/>
+        <MovieInfoComment />
     </Container>
     );
 
