@@ -7,14 +7,23 @@ import SignInModal from '../modals/SignInModal';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logOutDB } from '../redux/modules/user';
+import { useNavigate } from 'react-router-dom';
+
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // 로그인 검사 부분
+  const is_login = useSelector((state) => state.user.is_login);
+  console.log(is_login);
+
+  React.useEffect(() => {}, [is_login]);
+
   const [signUpModalOn, setSignUpModalOn] = useState(false);
   const [signInModalOn, setSignInModalOn] = useState(false);
-
-  const dispatch = useDispatch();
 
   const logOut = () => {
     dispatch(logOutDB());
@@ -27,16 +36,21 @@ const Header = () => {
       <SignInModal show={signInModalOn} onHide={() => setSignInModalOn(false)} />
 
       <Container className='inner-set'>
-        <img src={logo} style={{ width: '180px', height: 'auto', cursor: 'pointer' }} alt='logo' />
+        <img src={logo} style={{ width: '180px', height: 'auto', cursor: 'pointer' }} alt='logo' onClick={() => navigate('/')}/>
         <HeaderItems>
           <SearchBar>
             <FontAwesomeIcon icon={faMagnifyingGlass} color='#dcdcdc' />
             <input type='text' placeholder='콘텐츠, 인물, 컬렉션, 유저를 검색해보세요.' />
           </SearchBar>
           <div>
-            <button onClick={() => setSignInModalOn(true)}>로그인</button>
-            <button onClick={logOut}>로그아웃</button>
-            <button onClick={() => setSignUpModalOn(true)}>회원가입</button>
+            {is_login === false ? (
+              <>
+                <button onClick={() => setSignInModalOn(true)}>로그인</button>
+                <button onClick={() => setSignUpModalOn(true)}>회원가입</button>
+              </>
+            ) : (
+              <button onClick={logOut}>로그아웃</button>
+            )}
           </div>
         </HeaderItems>
       </Container>

@@ -36,6 +36,7 @@ export const authApi = {
         // console.log(localStorage.getItem('nickName'));
         // console.log(localStorage.getItem('is_login'));
         alert('로그인 되었습니다!');
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -56,47 +57,61 @@ export const movieListApi = {
         console.log(err);
       });
   },
+  // 오누리 작성 부분(디테일 페이지 테스트)
+  loadOneMovieList: async (movie_id) => {
+    return await instance
+      .get(`/movies/${movie_id}`)
+      .then((res) => {
+        // console.log(res);
+        return res;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
 
 export const commentApi = {
   createComment: (comment, username) => {
-      instance.post(`/comment/{postId}`, 
-      comment)
+    instance
+      .post(`/comment/{postId}`, comment)
       .then((res) => {
-          return(res) 
+        return res;
       })
       .catch((err) => {
-          console.log(err.response.data);
-      });    
-},
+        console.log(err.response.data);
+      });
+  },
   loadComment: (comment) => {
-      instance.get(`/comment/{postId}`, comment)
+    instance
+      .get(`/comment/{postId}`, comment)
       .then((res) => {
-          return(res) 
+        return res;
       })
       .catch((err) => {
-          console.log(err.response.data);
-      });  
-},
+        console.log(err.response.data);
+      });
+  },
 
-updateComment: (comment) => {
-      instance.put(`/comment/{postId}`, comment)
+  updateComment: (comment) => {
+    instance
+      .put(`/comment/{postId}`, comment)
       .then((res) => {
-          return(res) 
+        return res;
       })
       .catch((err) => {
-          console.log(err.response.data);
-      });  
-},
+        console.log(err.response.data);
+      });
+  },
 
-deleteComment: (comment) => {
-      instance.delete(`/comment/{postId}`, comment)
+  deleteComment: (comment) => {
+    instance
+      .delete(`/comment/{postId}`, comment)
       .then((res) => {
-          return(res) 
+        return res;
       })
       .catch((err) => {
-          console.log(err.response.data);
-      });  
-}
-  
-}
+        console.log(err.response.data);
+      });
+  },
+};

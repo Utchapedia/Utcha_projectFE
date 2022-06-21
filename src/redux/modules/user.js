@@ -6,12 +6,14 @@ import { produce } from 'immer';
 // Actions
 const LOG_OUT = 'LOG_OUT';
 const LOG_IN = 'LOG_IN';
+const LOAD_USER = 'LOAD_USER';
 // const GET_USER = 'GET_USER';
 // const SET_USER = 'SET_USER';
 
 // action creators
 export const logOut = createAction(LOG_OUT, (user) => ({ user }));
 export const logIn = createAction(LOG_IN, (user) => ({ user }));
+export const loadUser = createAction(LOAD_USER, () => ({}));
 // export const getUser = createAction(GET_USER, (user) => ({ user }));
 // export const setUser = createAction(SET_USER, () => ({}));
 
@@ -23,11 +25,17 @@ const initialState = {
 // console.log(initialState);
 
 // middlewares
+export const loadUserDB = () => {
+  return function (dispatch) {
+    dispatch(loadUser());
+  };
+};
+
 export const signInDB = (email, password) => {
   return function (dispatch) {
     console.log(email, password);
     authApi.signIn(email, password);
-    dispatch(logIn());
+    // dispatch(logIn());
   };
 };
 
@@ -49,21 +57,26 @@ export const logOutDB = () => {
 
 export default handleActions(
   {
+    [LOAD_USER]: (state, action) =>
+      produce(state, (draft) => {
+        state.is_login = !!window.localStorage.getItem('nickName');
+        draft.user = window.localStorage.getItem('nickName');
+      }),
     // [SET_USER]: (state, action) =>
     //   produce(state, (draft) => {
     //     console.log(draft);
     //     draft.is_login = true;
     //   }),
-    [LOG_IN]: (state, action) =>
-      produce(state, (draft) => {
-        draft.is_login = true;
-        draft.user = localStorage.getItem('nickName');
-      }),
+    // [LOG_IN]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     draft.is_login = true;
+    //     draft.user = localStorage.getItem('nickName');
+    //   }),
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
         localStorage.clear();
-        draft.user = null;
         draft.is_login = false;
+        draft.user = null;
       }),
     // [GET_USER]: (state, action) => produce(state, (draft) => {}),
   },

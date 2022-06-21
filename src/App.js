@@ -7,12 +7,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import Main from './pages/Main';
 import Detail from './pages/Detail';
+import { loadUserDB } from './redux/modules/user';
+import { loadOneMovieListDB } from './redux/modules/detail';
 
 function App() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(loadMovieListDB());
+    dispatch(loadUserDB());
   }, []);
 
   return (

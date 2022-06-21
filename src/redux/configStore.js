@@ -4,10 +4,11 @@ import thunk from 'redux-thunk';
 import movieList from './modules/movieList';
 import commentModule from './modules/commentModule';
 import user from './modules/user';
+import detail from './modules/detail';
 
 const middlewares = [thunk];
 
-const rootReducer = combineReducers({ movieList, commentModule, user });
+const rootReducer = combineReducers({ movieList, commentModule, user, detail });
 
 const enhancer = applyMiddleware(...middlewares);
 
