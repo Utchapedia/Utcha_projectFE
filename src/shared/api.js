@@ -45,7 +45,7 @@ export const authApi = {
 export const movieListApi = {
   loadMovieList: async () => {
     return await instance
-      .get('movies')
+      .get('/movies')
       .then((res) => {
         // console.log(res);
         return res;
