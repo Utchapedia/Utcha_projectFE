@@ -57,3 +57,46 @@ export const movieListApi = {
       });
   },
 };
+
+export const commentApi = {
+  createComment: (comment, username) => {
+      instance.post(`/comment/{postId}`, 
+      comment)
+      .then((res) => {
+          return(res) 
+      })
+      .catch((err) => {
+          console.log(err.response.data);
+      });    
+},
+  loadComment: (comment) => {
+      instance.get(`/comment/{postId}`, comment)
+      .then((res) => {
+          return(res) 
+      })
+      .catch((err) => {
+          console.log(err.response.data);
+      });  
+},
+
+updateComment: (comment) => {
+      instance.put(`/comment/{postId}`, comment)
+      .then((res) => {
+          return(res) 
+      })
+      .catch((err) => {
+          console.log(err.response.data);
+      });  
+},
+
+deleteComment: (comment) => {
+      instance.delete(`/comment/{postId}`, comment)
+      .then((res) => {
+          return(res) 
+      })
+      .catch((err) => {
+          console.log(err.response.data);
+      });  
+}
+  
+}
