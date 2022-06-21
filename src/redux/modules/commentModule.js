@@ -1,5 +1,5 @@
 //comment.js
-import { commentApi } from "../../shared/apiTest";
+import { commentApi } from "../../shared/api";
 
 //Actions
 const CREATE = 'commentModule/CREATE';
