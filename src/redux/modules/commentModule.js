@@ -1,55 +1,94 @@
 //comment.js
+import { commentApi } from "../../shared/apiTest";
 
 //Actions
-const CREATE = 'comment/CREATE';
-const LOAD = 'comment/LOAD';
-const UPDATE = 'comment/UPDATE';
-const DELETE = 'comment/DELETE';
+const CREATE = 'commentModule/CREATE';
+const LOAD = 'commentModule/LOAD';
+const UPDATE = 'commentModule/UPDATE';
+const DELETE = 'commentModule/DELETE';
 
 const initialState = {
-    list : [],
-    post : []};
+    list : [{
+        postId: 0,
+        commentId: 0,
+        comment: "재밌어요~!",
+        nickName: "테스트네임",
+        createdAt: "2020-04-09T19:12:30.686",
+        editcheck: "false"
+    },
+    {
+        postId: 1,
+        commentId: 1,
+        comment: "최고최고~!",
+        nickName: "테스트네임2",
+        createdAt: "2020-04-10T19:12:30.686",
+        editcheck: "false"
+    }
+
+]};
 
 // Action Creators
 
-export function CreateComment(new_comment) {
+export function createMyComment(new_comment) {
+    
     return {type : CREATE, new_comment}
 }
-
-export function LoadComment(new_comments) {
+export function loadComments(new_comments) {
     return {type : LOAD, new_comments}
 }
-
-export function UpdateComment(new_comments) {
+export function updateComment(new_comments) {
     return {type : UPDATE, new_comments}
 }
-
-export function DELETEComment(new_comments) {
+export function deleteComment(new_comments) {
     return {type : DELETE, new_comments}
 }
 
 //middlewares
+export const CreateCommentDB = (comment,username) => {
+    
+    return async function (dispatch) {
+        const data = await commentApi.createComment();
+        dispatch(createMyComment(data.data[0].comment));       
+    };
+};
 
-// export const CreateCommentDB = () => {
-//     return function (dispatch) {
-//         const data= await 
-//     }
-// }
+export const LoadCommentDB = (comment, username) => {
+    return async function (dispatch) {
+        const data = await commentApi.loadComment();
+        dispatch(loadComments(data.data[0].comment));       
+    };
+};
+
+export const UpdateCommentDB = (comment) => {
+    return async function (dispatch) {
+        const data = await commentApi.updateComment();
+        dispatch(updateComment(data.data[0].comment));       
+    };
+};
+
+export const DeleteCommentDB = (comment) => {
+    return async function (dispatch) {
+        const data = await commentApi.deleteComment();
+        dispatch(deleteComment(data.data[0].comment));       
+    };
+};
 
 
 //Reducer
 export default function reducer(state = initialState, action={}) {
     switch (action.type){
-        case 'comment/CREATE' : {
-            const new_comment = action.new_comment;            
-            const new_comments = [...state.list[0].comments];
-            new_comments.push(new_comment);
-            
-            const new_post = [{...state.post[0]}];
-            new_post[0].comments = new_comments;
-            return {list: state.list, post:[{...new_post[0]}]}
-            
+
+        case 'commentModule/CREATE' : {         
+            const new_comment_list = [...state.list, action.new_comment];
+            console.log(action.new_comment)
+            return {list: new_comment_list}           
         }
+
+        case 'commentModule/LOAD' : {
+            const new_comment_list = [...state.list];
+            return {list: new_comment_list}
+        }
+
         default: return state
     }
 }

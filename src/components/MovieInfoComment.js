@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 
+import loadMovieListDB from "../redux/modules/movieList"
+
+//컴포넌트
 import GalleryTrailer from "./GalleryTrailer";
 import Credit from "./Credit";
-import Comment from "./Comment";
+import CommentList from "./CommentList";
 
 
-const MovieInfo= () => {
-
+const MovieInfoComment= () => {
     const movie_list = useSelector((state) => state.movieList.list);
     const param = useParams();
+    const [data, setData] = useState();
+    const dispatch = useDispatch();
+    
+    useEffect(()=> {
+        dispatch(loadMovieListDB(param.movieId));
+  
+    },[]);
 
     return(
         <MovieInfoContainer>
@@ -38,12 +47,11 @@ const MovieInfo= () => {
                     <hr style={{ border: "0", borderBottom: "1px solid #f0f0f0", margin: "24px 20px 0 20px" }} />
                     <CreditWrap>
                     <Credit />  
-                
                     </CreditWrap>
                     <br />
                     <hr style={{ border: "0", borderBottom: "1px solid #f0f0f0", margin: "24px 20px 0 20px" }} />
 
-                    <Comment/>
+                    <CommentList/>
                 
                 </LeftContent>
 
@@ -152,4 +160,4 @@ display: table-cell
 
 
 
-export default MovieInfo;
+export default MovieInfoComment;
