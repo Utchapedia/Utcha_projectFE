@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Virtual } from 'swiper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 import '../css/total.css';
 import 'swiper/css';
@@ -13,6 +14,8 @@ import 'swiper/css/pagination';
 import 'swiper/css/bundle';
 
 const SwiperTest = ({ movie_list }) => {
+  const navigate = useNavigate();
+
   SwiperCore.use([Navigation, Pagination]);
 
   return (
@@ -36,7 +39,12 @@ const SwiperTest = ({ movie_list }) => {
         {movie_list.map((list, idx) => {
           return (
             <SwiperSlide key={idx}>
-              <Movie key={idx}>
+              <Movie
+                key={idx}
+                onClick={() => {
+                  navigate(`/detail/${list.movieId}`);
+                }}
+              >
                 <div>
                   <div className='poster-img'>
                     <img src={list.originalTitle} alt='posterImg' />
