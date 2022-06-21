@@ -20,8 +20,10 @@ const SignInModal = ({ show, onHide }) => {
       return;
     }
 
-    dispatch(signInDB(email.current.value, password.current.value));
-    // console.log(email.current.value, password.current.value);
+    if (email && password !== '') {
+      dispatch(signInDB(email.current.value, password.current.value));
+      // console.log(email.current.value, password.current.value);
+    }
   };
 
   return (
@@ -51,7 +53,7 @@ const SignInModal = ({ show, onHide }) => {
               <Form.Control type='password' placeholder='비밀번호' ref={password} />
             </Form.Group>
 
-            <Button block variant='info' type='button' className='my-3' onClick={signIn}>
+            <Button variant='info' type='button' className='my-3' onClick={signIn}>
               로그인
             </Button>
             <HorizontalLine text={'or'} />

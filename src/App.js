@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Header from './components/Header';
 import Main from './pages/Main';
-import Detail from "./pages/Detail";
+import Detail from './pages/Detail';
 
 function App() {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Main />} />
-        <Route path="/detail/:movieId" element={<Detail />}></Route>
+        <Route path='/detail/:movieId' element={<Detail />}></Route>
       </Routes>
     </div>
   );

@@ -7,10 +7,19 @@ import SignInModal from '../modals/SignInModal';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch } from 'react-redux';
+import { logOutDB } from '../redux/modules/user';
 
 const Header = () => {
   const [signUpModalOn, setSignUpModalOn] = useState(false);
   const [signInModalOn, setSignInModalOn] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const logOut = () => {
+    dispatch(logOutDB());
+    window.location.reload('/');
+  };
 
   return (
     <>
@@ -26,7 +35,7 @@ const Header = () => {
           </SearchBar>
           <div>
             <button onClick={() => setSignInModalOn(true)}>로그인</button>
-            <button>로그아웃</button>
+            <button onClick={logOut}>로그아웃</button>
             <button onClick={() => setSignUpModalOn(true)}>회원가입</button>
           </div>
         </HeaderItems>

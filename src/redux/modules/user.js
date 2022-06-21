@@ -1,20 +1,33 @@
 // user.js
-import { movieListApi, authApi } from '../../shared/api';
+import { authApi } from '../../shared/api';
+import { createAction, handleActions } from 'redux-actions';
+import { produce } from 'immer';
 
 // Actions
-const LOAD = 'movieList/LOAD';
-// const CREATE = 'user/CREATE';
+const LOG_OUT = 'LOG_OUT';
+const LOG_IN = 'LOG_IN';
+// const GET_USER = 'GET_USER';
+// const SET_USER = 'SET_USER';
 
+// action creators
+export const logOut = createAction(LOG_OUT, (user) => ({ user }));
+export const logIn = createAction(LOG_IN, (user) => ({ user }));
+// export const getUser = createAction(GET_USER, (user) => ({ user }));
+// export const setUser = createAction(SET_USER, () => ({}));
+
+//initialState
 const initialState = {
   user: null,
   is_login: false,
 };
+// console.log(initialState);
 
 // middlewares
 export const signInDB = (email, password) => {
   return function (dispatch) {
     console.log(email, password);
-    return authApi.signIn(email, password);
+    authApi.signIn(email, password);
+    dispatch(logIn());
   };
 };
 
@@ -25,27 +38,34 @@ export const signUpDB = (name, email, password) => {
   };
 };
 
-export const loadMovieListDB = () => {
-  return async function (dispatch) {
-    // 만들어둔 instance에 보낼 요청 타입과 주소로 요청.
-    const data = await movieListApi.loadMovieList();
-    // console.log(data.data[0].movies);
-    dispatch(loadMovieList(data.data[0].movies));
+export const logOutDB = () => {
+  return function (dispatch, { history }) {
+    dispatch(logOut());
+    console.log('로그아웃 완료!');
+    // replace는 뒤로가기 시에도 원래 페이지가 나오지 않음.
+    // history.replace('/');
   };
 };
 
-// Actions Creators
-export function loadMovieList(movie_list) {
-  return { type: LOAD, movie_list };
-}
-
-// Reducer
-export default function reducer(state = initialState, action = {}) {
-  switch (action.type) {
-    case 'movieList/LOAD': {
-      return { list: action.movie_list };
-    }
-    default:
-      return state;
-  }
-}
+export default handleActions(
+  {
+    // [SET_USER]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     console.log(draft);
+    //     draft.is_login = true;
+    //   }),
+    [LOG_IN]: (state, action) =>
+      produce(state, (draft) => {
+        draft.is_login = true;
+        draft.user = localStorage.getItem('nickName');
+      }),
+    [LOG_OUT]: (state, action) =>
+      produce(state, (draft) => {
+        localStorage.clear();
+        draft.user = null;
+        draft.is_login = false;
+      }),
+    // [GET_USER]: (state, action) => produce(state, (draft) => {}),
+  },
+  initialState
+);
