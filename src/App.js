@@ -1,10 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
+import { loadMovieListDB } from './redux/modules/movieList';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Header from './components/Header';
 import Main from './pages/Main';
-import { loadMovieListDB } from './redux/modules/movieList';
-
 import Detail from "./pages/Detail";
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Main />} />
-        <Route path="/detail" element={<Detail />}></Route>
+        <Route path="/detail/:movieId" element={<Detail />}></Route>
       </Routes>
     </div>
   );

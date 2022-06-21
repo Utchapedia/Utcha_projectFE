@@ -1,26 +1,39 @@
-import React from "react";
+import {React, useState} from "react";
 import styled from "styled-components";
-import { FaStar, FaPencilAlt } from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { FaPencilAlt } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
 
+
+import CommentModal from "./CommentModal";
 
 const Banner= () => {
+    const [commentModalOn, setCommentModalOn] = useState(false);
+    const movie_list = useSelector((state) => state.movieList.list);
+    
     return(
+        <>
+         <CommentModal 
+        show={commentModalOn} 
+        hide={()=>setCommentModalOn(false)}
+        />
     <Container>
-        <TitleImg />
-        
+        <Poster style={{backgroundImage: `url(${movie_list.posterUrl})` }}/>
         <WrapInfo>
-            <Poster > 
-            </Poster>
+            <Original style={{backgroundImage: `url(${movie_list.originalUrl})` }}/> 
+            
             <InfoAndRating>
                 <SimpleInfo>
-                    <Title>
-                    범죄도시2
-                    </Title>
-                    <YearGenreCountry>
-                        <Year>2022</Year> • <Genre>범죄/액션</Genre> • <Country>한국</Country> 
-                    </YearGenreCountry>
+                    <div className='title' style={{FontSize: '39pt'}}>
+                   {movie_list.title}
+                   </div>
+                    <div className='yearGenreCountry'>
+                    {movie_list.year} • {movie_list.genre} • {movie_list.country}
+                    </div>
                     <Score>
-                        평균★ 3.6
+                        평균                    
+                    <FontAwesomeIcon icon={faStar} width='12' height='10' />
                     </Score>
                 </SimpleInfo>
             </InfoAndRating>
@@ -28,20 +41,23 @@ const Banner= () => {
                 <GiveStars>
                     <h3 className="starTitle"> 평가하기</h3>
                     <Stars>
-                        <StarIcon />
-                        <StarIcon />
-                        <StarIcon />
-                        <StarIcon />
-                        <StarIcon />
+                        <FontAwesomeIcon icon={faStar} width='20' height='20' />
+                        <FontAwesomeIcon icon={faStar} width='20' height='20' />
+                        <FontAwesomeIcon icon={faStar} width='20' height='20' />
+                        <FontAwesomeIcon icon={faStar} width='20' height='20' />
+                        <FontAwesomeIcon icon={faStar} width='20' height='20' />
                     </Stars>
                 </GiveStars>
                 <OpenComment>
-                    <h3 className="commentTitle"> 코멘트</h3>
-                        <CommentIcon />
+                    <h3 className="commentTitle" > 코멘트</h3>
+                        <CommentIcon onClick={() => setCommentModalOn(true)}
+                        ></CommentIcon>
+                        
                 </OpenComment>
             </RatingAndComment>
         </WrapInfo>
     </Container>
+    </>
     );
 
 }
@@ -50,11 +66,11 @@ height: 60vh;
 background-color: #fff;
 `
 
-const TitleImg = styled.div`
+const Poster = styled.div`
 height: 40vh;
 width: 100%;
 display: flex;
-background-image: url('https://image.cine21.com/resize/cine21/still/2022/0513/16_18_42__627e0652dce3e[H800-].jpg');
+
 background-size: cover;
 media (min-width: 1023px).css-1mcdpgu-BlurPoster {width: 768px;}
 
@@ -69,17 +85,13 @@ margin-top: 10px;
 
 `
 
-const Poster = styled.div`
+const Original = styled.div`
 width: 140px;
 height: 200px;
 transform: translate(0, -10%);
 background-size: cover;
-
 display: flex;
 align-items: flex-end;
-background-image: url('https://w.namu.la/s/d0295ada5124aa37f7d06c7455dcfebcb28ca0716b6b98f214c6e176bd953ffcda3596b8a074216d23f4e4fcd2fa9e0f8588b49eedb8d775e320e4d92bfa005f778667994bc8846d22209b8ef96f4cca301d9a6d8863cb118b341e96a07e96018efc4b77959c89058f5b23c08c3cd627');
-
-
 `
 const InfoAndRating = styled.div`
 display: flex;
@@ -94,29 +106,20 @@ text-align: left;
 justify-content: center;
 margin-left: 20px;
 
-`
+.title{
+    font-size: 2rem;
+    
 
-const Title = styled.h1`
-font-size: 2rem;
-`
-
-const YearGenreCountry = styled.div`
-
-display: flex;
+}
+.yearGenreCountry{
+    margin-top: 1em;
+    display: flex;
 color: #848484;
+font-size: 1.2rem;
+}
 
 `
-const Year = styled.h3`
-margin : 0px;
-font-size: 1.2rem;`
 
-const Genre = styled.h3`
-margin : 0px;
-font-size: 1.2rem;`
-
-const Country = styled.h3`
-font-size: 1.2rem;
-margin : 0px;`
 
 const Score = styled.h3`
 margin-top: 30px;
@@ -135,18 +138,12 @@ line-height: 1px;
 .starTitle{
     font-size: 1.2rem;
 }
-
 `
+
 const Stars = styled.div`
 justify-content: center;
 `
-const StarIcon = styled(FaStar)`
-    position: relative;
-    left: 35px;
-    font-size: 2rem;
-    color: #ddd;
-  
-`
+
 
 
 const OpenComment = styled.div`
@@ -161,7 +158,5 @@ position: relative;
 `
 
 
-
-
-
 export default Banner;
+

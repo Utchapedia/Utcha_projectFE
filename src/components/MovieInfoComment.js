@@ -1,9 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from "react-router-dom";
+
 import GalleryTrailer from "./GalleryTrailer";
 import Credit from "./Credit";
+import Comment from "./Comment";
+
 
 const MovieInfo= () => {
+
+    const movie_list = useSelector((state) => state.movieList.list);
+    const param = useParams();
+
     return(
         <MovieInfoContainer>
             <ContainerInner>
@@ -14,33 +23,30 @@ const MovieInfo= () => {
                         </BasicInfoTitle>
                             <BasicInfoAndDesc>
                                 <BasicInfo>
-                                    '범죄도시'
+                                {movie_list.originalName}
                                     <br />
-                                    <span>'2022' · '한국' · '범죄'</span>
+                                    <span>{movie_list.year} • {movie_list.genre} • {movie_list.country}</span>
                                     <br />
-                                    <span>'1시간 46분' · '15'세</span>
+                                    <span>{movie_list.duration} · {movie_list.age}</span>
                                 </BasicInfo>
-                                {/* <hr style={{ border: "0", borderBottom: "1px solid #f0f0f0", margin: "24px 20px 0 20px" }} /> */}
-                            
+
                                 <Description>
-                                    
-                                <span>
-                                “느낌 오지? 이 놈 잡아야 하는 거”<br />
-                                <br />
-                                가리봉동 소탕작전 후 4년 뒤, 금천서 강력반은 베트남으로 도주한 용의자를 인도받아 오라는 미션을 받는다. <br />
-                                괴물형사 ‘마석도’(마동석)와 ‘전일만’(최귀화) 반장은 현지 용의자에게서 수상함을 느끼고, 
-                                그의 뒤에 무자비한 악행을 벌이는 ‘강해상’(손석구)이 있음을 알게 된다. 
-                                ‘마석도’와 금천서 강력반은 한국과 베트남을 오가며 역대급 범죄를 저지르는 ‘강해상’을 본격적으로 쫓기 시작하는데...<br />
-                                <br />
-                                나쁜 놈들 잡는 데 국경 없다!<br />
-                                통쾌하고 화끈한 범죄 소탕 작전이 다시 펼쳐진다!<br />
-                                </span>
-                                    
+                                    {movie_list.description}
                                 </Description>
                         </BasicInfoAndDesc>
                     </DetailInfo>
+                    <hr style={{ border: "0", borderBottom: "1px solid #f0f0f0", margin: "24px 20px 0 20px" }} />
+                    <CreditWrap>
                     <Credit />  
+                
+                    </CreditWrap>
+                    <br />
+                    <hr style={{ border: "0", borderBottom: "1px solid #f0f0f0", margin: "24px 20px 0 20px" }} />
+
+                    <Comment/>
+                
                 </LeftContent>
+
                 <RightGalleryAndTrailer>
                 <GalleryTrailer />
                 </RightGalleryAndTrailer>
@@ -51,7 +57,7 @@ const MovieInfo= () => {
 }
 const MovieInfoContainer = styled.div`
 padding: 28px 0px 48px;
-overflow: hidden;`
+overflow: hidden;  `
 
 const ContainerInner = styled.div`
 max-width: 976px;
@@ -61,18 +67,22 @@ display: table;
 
 const DetailInfo = styled.div`
 
-border: 1px solid;
-border-radius: 6px;
-background: rgb(255, 255, 255);
-overflow: hidden;
-border-color: rgb(227, 227, 227) !important;
-text-align: left;
+
 
 `
 const LeftContent = styled.div`
 width: 640px;
 padding: 0px 8px;
 display: table-cell
+border: 1px solid;
+border-radius: 6px;
+background: rgb(255, 255, 255);
+overflow: hidden;
+border-color: rgb(227, 227, 227) !important;
+text-align: left;
+height: 165vh;
+
+
 `
 
 const BasicInfoAndDesc = styled.div`
@@ -119,6 +129,12 @@ white-space: pre-wrap;
 letter-spacing: -0.2px;
 `
 
+const CreditWrap = styled.div`
+// border: 1px solid;
+// border-radius: 6px;
+// border-color: rgb(227, 227, 227)
+
+`
 
 
 const RightGalleryAndTrailer = styled.div`
@@ -127,12 +143,10 @@ border-radius: 6px;
 background: rgb(255, 255, 255);
 overflow: hidden;
 border-color: rgb(227, 227, 227) !important;
-@media only screen and (max-width: 1023px) {
-    display:none
-    }  
-max-width: 450px;
+max-width: 300px;
 padding: 0px 8px;
 display: table-cell
+
 `
 
 
