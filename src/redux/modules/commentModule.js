@@ -1,6 +1,8 @@
 //comment.js
 import { commentApi } from "../../shared/api";
 
+
+
 //Actions
 const CREATE = 'commentModule/CREATE';
 const LOAD = 'commentModule/LOAD';
@@ -30,7 +32,6 @@ const initialState = {
 // Action Creators
 
 export function createMyComment(new_comment) {
-    
     return {type : CREATE, new_comment}
 }
 export function loadComments(new_comments) {
@@ -44,18 +45,19 @@ export function deleteComment(new_comments) {
 }
 
 //middlewares
-export const CreateCommentDB = (comment,username) => {
-    
-    return async function (dispatch) {
-        const data = await commentApi.createComment();
-        dispatch(createMyComment(data.data[0].comment));       
+export const CreateCommentDB = (comment,username, movie_id) => {
+    return function (dispatch) {
+        const data = commentApi.createComment(comment,username, movie_id)
+        console.log(data)
+        dispatch(createMyComment(comment));       
     };
 };
 
-export const LoadCommentDB = (comment, username) => {
+export const LoadCommentDB = (comments) => {
     return async function (dispatch) {
-        const data = await commentApi.loadComment();
-        dispatch(loadComments(data.data[0].comment));       
+        console.log(commentApi.loadComment)
+        const data = await commentApi.loadComment(comments);
+        dispatch(loadComments(data.data[0].movie_id.comments));       
     };
 };
 
@@ -79,16 +81,25 @@ export default function reducer(state = initialState, action={}) {
     switch (action.type){
 
         case 'commentModule/CREATE' : {         
-            const new_comment_list = [...state.list, action.new_comment];
-            console.log(action.new_comment)
+            const new_comment = action.new_comment;
+            // const new_comments = [...state.list.movie_id.comments]
+            // new_comments.push(new_comment);
+            // console.log(state.list)
+
+            const new_comment_list = [{...state.list}, action.new_comment]
+            
+            console.log(new_comment_list)
             return {list: new_comment_list}           
         }
 
-        case 'commentModule/LOAD' : {
-            const new_comment_list = [...state.list];
-            return {list: new_comment_list}
-        }
+        // case 'commentModule/LOAD' : {
+        //     // const new_comment_list = [...state.list];
+        //      console.log(action.new_comments)
+        //     return {list: action.new_comments}
+        // }
 
         default: return state
     }
 }
+
+

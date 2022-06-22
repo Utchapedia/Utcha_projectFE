@@ -1,10 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import "swiper/css/navigation";
+import 'swiper/css';
+import { Navigation } from "swiper";
+
 
 const Credit = (props) => {
+  //console.log(props)
     const settings = {
             dots: true,
             infinite: true,
@@ -12,123 +16,35 @@ const Credit = (props) => {
             slidesToShow: 1,
             slidesToScroll: 1
       };
+   
+    const creditOne = props.credits
+      
+    
+    
+
     return (
-        <div>
+      <>
         <CreditTitle>
-            출연/제작        
+        출연/제작
         </CreditTitle>
-        <Slider {...settings}>
-          <div>
-            <CreditPageOne>
-                <FirstGroup>
-						<span>
-							<strong>1</strong>st
-						</span>
-						<p>Nickname</p>
-					
-					<li>
-						<span>
-							<strong>2</strong>nd
-						</span>
-						<p>Nickname</p>
-					</li>
-					<li>
-						<span>
-							<strong>3</strong>rd
-						</span>
-						<p>Nickname</p>
-					</li>
-					<li>
-						<span>
-							<strong>4</strong>th
-						</span>
-						<p>Nickname</p>
-					</li>
-                    </FirstGroup>
-                    <SecondGroup>
-						<span>
-							<strong>5</strong>th
-						</span>
-						<p>Nickname</p>
-                        <span>
-							<strong>6</strong>th
-						</span>
-						<p>Nickname</p>
-                        <span>
-							<strong>7</strong>th
-						</span>
-						<p>Nickname</p>
-                        <span>
-							<strong>8</strong>th
-						</span>
-						<p>Nickname</p>
-                    
-
-                    </SecondGroup>
-
-            </CreditPageOne>
-          </div>
-          <div>
-          <CreditPageTwo>
-                <ThirdGroup>
-						<span>
-							<strong>1</strong>st
-						</span>
-						<p>Nickname</p>
-					
-					<li>
-						<span>
-							<strong>2</strong>nd
-						</span>
-						<p>Nickname</p>
-					</li>
-					<li>
-						<span>
-							<strong>3</strong>rd
-						</span>
-						<p>Nickname</p>
-					</li>
-					<li>
-						<span>
-							<strong>4</strong>th
-						</span>
-						<p>Nickname</p>
-					</li>
-                    </ThirdGroup>
-                    <FourthGroup>
-						<span>
-							<strong>5</strong>th
-						</span>
-						<p>Nickname</p>
-                        <span>
-							<strong>6</strong>th
-						</span>
-						<p>Nickname</p>
-                        <span>
-							<strong>7</strong>th
-						</span>
-						<p>Nickname</p>
-                        <span>
-							<strong>8</strong>th
-						</span>
-						<p>Nickname</p>
-                    
-
-                    </FourthGroup>
-
-            </CreditPageTwo>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
+        <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+        <SwiperSlide>
+          <div className="FirstGroup">
+            <li>
+            
+            </li>
           
-        </Slider>
-
-
-        </div>
+          
+          
+          </div>
+          <div className="SecondGroup"></div>
+        </SwiperSlide>
+        
+            
+          <SwiperSlide>Slide 2</SwiperSlide>
+          <SwiperSlide>Slide 3</SwiperSlide>
+          </Swiper>
+    </>
     );
   }
   const CreditTitle = styled.div`
@@ -139,9 +55,12 @@ const Credit = (props) => {
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
   `
+
   
-  const CreditPageOne = styled.div`
   
+  const creditPhoto = styled.div`
+  width: 100px;
+  height: 100px;
   `
 
   const FirstGroup = styled.div`

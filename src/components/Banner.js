@@ -6,17 +6,15 @@ import {FaPencilAlt} from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux';
 
 import CommentModal from '../modals/CommentModal';
+//import InputComment from '../modals/InputComment';
 
-const Banner = () => {
+const Banner = ({movie_id}) => {
     const moviePostId = useSelector((state)=>state.detail.list)
-    const [commentModalOn, setCommentModalOn] = useState(false);
+    const [ModalShow, setModalShow] = useState(false);
 
     return(
         <>
-            <CommentModal 
-            show={commentModalOn} 
-            onhide={()=>setCommentModalOn(false)}
-            />
+        <CommentModal show={ModalShow} onHide={()=>setModalShow(false)} movie_id={movie_id}/>
         <Container>
             <Poster style={{backgroundImage: `url(${moviePostId.posterUrl})`}} />
             <WrapInfo>
@@ -42,7 +40,7 @@ const Banner = () => {
                 </GiveStars>
                 <OpenComment>
                     <div className='commentTitle'>코멘트</div>
-                    <CommentIcon onClick={() => setCommentModalOn(true)}></CommentIcon>
+                    <CommentIcon onClick={() => setModalShow(true)}></CommentIcon>
                 </OpenComment>
             </RatingAndComment>
         </Container>
