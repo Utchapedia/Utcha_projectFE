@@ -1,6 +1,7 @@
-import axios from 'axios';
 import instance from './Request';
-const token = localStorage.getItem("is_login");
+
+// 토큰 설정
+const token = localStorage.getItem('is_login');
 
 export const authApi = {
   signUp: (name, email, password) => {
@@ -75,37 +76,28 @@ export const movieListApi = {
 export const commentApi = {
   createComment: (comment, username, movie_Id) => {
     instance
-      .post(`/comments/${movie_Id}`,
-       {
-        comment:comment, 
-        username:username},
-      { headers: { Authorization: `Bearer ${token}` }}
+      .post(
+        `/comments/${movie_Id}`,
+        {
+          comment: comment,
+          username: username,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((res) => {
-        console.log(res)
-        const new_comment ={
-          comment: comment, 
-          commentId: res.data.wrritenComment.commentId,
-          countLikes: res.data.wrritenComment.countLikes,
-          createdAt: res.data.wrritenComment.createdAt,
-          movieId: res.data.wrritenComment.movieId,
-          nickName: res.data.wrritenComment.nickName
-        
-        }
-
-        console.log(new_comment)
-        return res;
+        alert('코멘트 저장완료!');
+        window.location.reload();
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
       });
   },
 
-  loadComment: (movieId) => {
-    instance
-      .get(`/comments/${movieId}`)
+  loadComment: async (movie_id) => {
+    return await instance
+      .get(`/comments/${movie_id}`)
       .then((res) => {
-        console.log(res)
+        console.log(res);
         return res;
       })
       .catch((err) => {
