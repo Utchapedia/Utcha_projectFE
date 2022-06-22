@@ -1,5 +1,6 @@
 import axios from 'axios';
 import instance from './Request';
+const token = localStorage.getItem("is_login");
 
 export const authApi = {
   signUp: (name, email, password) => {
@@ -72,19 +73,50 @@ export const movieListApi = {
 };
 
 export const commentApi = {
-  createComment: (comment, username) => {
+  createComment: (comment, username, movie_Id) => {
     instance
-      .post(`/comment/{postId}`, comment)
+      .post(`/comments/${movie_Id}`,
+       {
+        comment:comment, 
+        username:username},
+      { headers: { Authorization: `Bearer ${token}` }}
+      )
       .then((res) => {
+        console.log(res)
+        const new_comment ={
+          comment: comment, 
+          commentId: res.data.wrritenComment.commentId,
+          countLikes: res.data.wrritenComment.countLikes,
+          createdAt: res.data.wrritenComment.createdAt,
+          movieId: res.data.wrritenComment.movieId,
+          nickName: res.data.wrritenComment.nickName
+        
+        }
+
+        console.log(new_comment)
         return res;
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.log(err.response);
       });
   },
-  loadComment: (comment) => {
+
+  loadComment: (movieId) => {
     instance
-      .get(`/comment/{postId}`, comment)
+      .get(`/comments/${movieId}`)
+      .then((res) => {
+        console.log(res)
+        return res;
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  },
+
+  updateComment: (comment, movieId) => {
+    instance
+      .put(`/comment/${movieId}`, comment)
+      // { headers: { Authorization: `Bearer ${token}` }}
       .then((res) => {
         return res;
       })
@@ -93,20 +125,9 @@ export const commentApi = {
       });
   },
 
-  updateComment: (comment) => {
+  deleteComment: (comment, postId) => {
     instance
-      .put(`/comment/{postId}`, comment)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-      });
-  },
-
-  deleteComment: (comment) => {
-    instance
-      .delete(`/comment/{postId}`, comment)
+      .delete(`/comment/${postId}`, comment)
       .then((res) => {
         return res;
       })

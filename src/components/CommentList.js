@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,9 +8,17 @@ import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper";
 import { useDispatch, useSelector } from 'react-redux';
 
-const CommentList= () => {
-  const comment_list = useSelector((state) => state.commentModule.list);
-    console.log(comment_list.comment)
+import {loadComments} from '../redux/modules/commentModule';
+
+const CommentList= ({movie_id}) => {
+const comment_list = useSelector((state) => state.commentModule.list);
+const dispatch=useDispatch();
+
+useEffect(()=>{
+dispatch(loadComments(movie_id))
+},[])
+
+
 
     return(
       <CommentContainer>

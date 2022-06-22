@@ -7,7 +7,7 @@ import GalleryTrailer from "./GalleryTrailer";
 import Credit from "./Credit";
 import CommentList from "./CommentList";
 
-const MovieInfoComment = () => {
+const MovieInfoComment = ({movie_id}) => {
     const moviePostId = useSelector((state)=>state.detail.list);
     const param = useParams();
     const dispatch = useDispatch();
@@ -35,11 +35,11 @@ const MovieInfoComment = () => {
                     </DetailInfo>
                     <hr style={{ border: "0", borderBottom: "1px solid #f0f0f0", margin: "24px 20px 0 20px" }} />
                     <CreditWrap>
-                        {/* <Credit />   */}
+                        <Credit  {...moviePostId}/>  
                     </CreditWrap>
                     <br />
                     <hr style={{ border: "0", borderBottom: "1px solid #f0f0f0", margin: "24px 20px 0 20px" }} />
-                    {/* <CommentList/> */}
+                    <CommentList movie_id={movie_id}/>
                 </LeftContent>
 
                 <RightGalleryAndTrailer>
