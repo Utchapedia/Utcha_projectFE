@@ -15,18 +15,18 @@ const Detail = (props) => {
   //console.log(movie_id);
 
   const movieIdPost = useSelector((state) => state.detail.list);
-  //console.log(movieIdPost);
+  console.log(movieIdPost);
 
   React.useEffect(() => {
     dispatch(loadOneMovieListDB(movie_id));
   }, []);
+
   return (
     <Container>
       <div>{movieIdPost.title}</div>
-    <Banner movie_id={movie_id}/> 
-    <MovieInfoComment movie_id={movie_id}/>
+      <Banner movie_id={movie_id} />
+      <MovieInfoComment movie_id={movie_id} />
     </Container>
-    
   );
 };
 

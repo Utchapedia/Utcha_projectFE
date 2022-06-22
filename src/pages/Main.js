@@ -4,11 +4,11 @@ import '../css/total.css';
 
 import { useSelector } from 'react-redux';
 import MovieBoxTitle from '../components/MovieBoxTitle';
-import SwiperTest from '../components/SwiperTest';
+import MovieListBox from '../components/MovieListBox';
 
 const Main = () => {
   const movie_list = useSelector((state) => state.movieList.list);
-  console.log(movie_list);
+  // console.log(movie_list);
 
   const title = [
     '현재 인기 영화 순위',
@@ -20,16 +20,16 @@ const Main = () => {
   return (
     <Container>
       <MovieBoxTitle title={title[0]} />
-      <SwiperTest movie_list={movie_list.slice(0, 10)} />
+      <MovieListBox movie_list={movie_list.slice(0, 10)} />
 
       <MovieBoxTitle title={title[1]} />
-      <SwiperTest movie_list={movie_list.slice(10, 20)} />
+      <MovieListBox movie_list={movie_list.slice(10, 20)} />
 
       <MovieBoxTitle title={title[2]} />
-      <SwiperTest movie_list={movie_list.slice(20, 30)} />
+      <MovieListBox movie_list={movie_list.slice(20, 30)} />
 
       <MovieBoxTitle title={title[3]} />
-      <SwiperTest movie_list={movie_list.slice(30, 40)} />
+      <MovieListBox movie_list={movie_list.slice(30, 40)} />
     </Container>
   );
 };
@@ -39,4 +39,4 @@ const Container = styled.div`
   margin-top: 100px;
 `;
 
-export default Main;
+export default React.memo(Main);

@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Virtual } from 'swiper';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import '../css/total.css';
 import 'swiper/css';
@@ -13,7 +14,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/bundle';
 
-const SwiperTest = ({ movie_list }) => {
+const MovieListBox = ({ movie_list }) => {
   const navigate = useNavigate();
 
   SwiperCore.use([Navigation, Pagination]);
@@ -22,19 +23,20 @@ const SwiperTest = ({ movie_list }) => {
     <div className='inner-set' style={{ marginBottom: '40px' }}>
       <StyledSwiper
         spaceBetween={12}
-        slidesPerView={5}
-        slidesPerGroup={5}
+        slidesPerView={4}
+        slidesPerGroup={4}
         // scrollbar={{ draggable: true }}
         navigation
         draggable={false}
         // pagination={{ clickable: true }}
 
         //* 반응형 설정
-        // breakpoints={{
-        //   768: {
-        //     slidesPerView: 7,
-        //   },
-        // }}
+        breakpoints={{
+          900: {
+            slidesPerView: 5,
+            slidesPerGroup: 5,
+          },
+        }}
       >
         {movie_list.map((list, idx) => {
           return (
@@ -66,6 +68,8 @@ const SwiperTest = ({ movie_list }) => {
             </SwiperSlide>
           );
         })}
+        {/* <div class='swiper-button-prev'></div>
+        <div class='swiper-button-next'></div> */}
       </StyledSwiper>
     </div>
   );
@@ -163,4 +167,4 @@ const Movie = styled.div`
   }
 `;
 
-export default SwiperTest;
+export default MovieListBox;
