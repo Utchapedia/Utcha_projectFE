@@ -11,14 +11,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logOutDB } from '../redux/modules/user';
 import { useNavigate } from 'react-router-dom';
 
-
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // 로그인 검사 부분
+  //* 로그인 검사 부분
   const is_login = useSelector((state) => state.user.is_login);
-  console.log(is_login);
+  // console.log(is_login);
 
   React.useEffect(() => {}, [is_login]);
 
@@ -30,28 +29,44 @@ const Header = () => {
     window.location.reload('/');
   };
 
+  // // 모달 체인지(테스트)
+  // const getChangeState = (value) => {
+  //   setSignUpModalOn(value);
+  // };
+
   return (
     <>
       <SignUpModal show={signUpModalOn} onHide={() => setSignUpModalOn(false)} />
       <SignInModal show={signInModalOn} onHide={() => setSignInModalOn(false)} />
 
       <Container className='inner-set'>
-        <img src={logo} style={{ width: '180px', height: 'auto', cursor: 'pointer' }} alt='logo' onClick={() => navigate('/')}/>
+        <img
+          src={logo}
+          style={{ width: '150px', height: 'auto', cursor: 'pointer' }}
+          alt='logo'
+          onClick={() => navigate('/')}
+        />
         <HeaderItems>
           <SearchBar>
             <FontAwesomeIcon icon={faMagnifyingGlass} color='#dcdcdc' />
             <input type='text' placeholder='콘텐츠, 인물, 컬렉션, 유저를 검색해보세요.' />
           </SearchBar>
-          <div>
+          <ButtonArea>
             {is_login === false ? (
               <>
-                <button onClick={() => setSignInModalOn(true)}>로그인</button>
-                <button onClick={() => setSignUpModalOn(true)}>회원가입</button>
+                <button className='btn-1' onClick={() => setSignInModalOn(true)}>
+                  로그인
+                </button>
+                <button className='btn-2' onClick={() => setSignUpModalOn(true)}>
+                  회원가입
+                </button>
               </>
             ) : (
-              <button onClick={logOut}>로그아웃</button>
+              <button className='btn-2' onClick={logOut}>
+                로그아웃
+              </button>
             )}
-          </div>
+          </ButtonArea>
         </HeaderItems>
       </Container>
     </>
@@ -82,13 +97,13 @@ const HeaderItems = styled.div`
   align-items: center;
 
   & button {
-    margin-left: 20px;
+    margin-left: 15px;
   }
 `;
 
 const SearchBar = styled.div`
   background-color: #f5f5f7;
-  width: 300px;
+  width: 310px;
   height: 30px;
 
   padding: 4px 8px;
@@ -102,6 +117,12 @@ const SearchBar = styled.div`
     width: 100%;
     height: 25px;
 
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+
+    cursor: text;
+
     background-color: transparent;
     margin-left: 5px;
 
@@ -110,4 +131,34 @@ const SearchBar = styled.div`
   }
 `;
 
-export default Header;
+const ButtonArea = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+
+  .btn-1 {
+    background-color: transparent;
+    color: #74747b;
+    font-size: 14px;
+
+    border: none;
+  }
+
+  .btn-2 {
+    background-color: transparent;
+    color: #353535;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    letter-spacing: -0.3px;
+    line-height: 20px;
+    height: 32px;
+
+    padding: 5px 14px 6px 14px;
+
+    border-radius: 6px;
+    border: 1px solid rgba(116, 116, 123, 0.5);
+  }
+`;
+
+export default React.memo(Header);
