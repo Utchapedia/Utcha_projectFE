@@ -1,67 +1,53 @@
-import React, { useEffect, useState } from "react";
+import React from'react';
 import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 
-import loadMovieListDB from "../redux/modules/movieList"
-
-//컴포넌트
 import GalleryTrailer from "./GalleryTrailer";
 import Credit from "./Credit";
 import CommentList from "./CommentList";
 
-
-const MovieInfoComment= () => {
-    const movie_list = useSelector((state) => state.movieList.list);
+const MovieInfoComment = () => {
+    const moviePostId = useSelector((state)=>state.detail.list);
     const param = useParams();
-    const [data, setData] = useState();
     const dispatch = useDispatch();
     
-    useEffect(()=> {
-        dispatch(loadMovieListDB(param.movieId));
-  
-    },[]);
-
     return(
         <MovieInfoContainer>
             <ContainerInner>
                 <LeftContent>
-                    <DetailInfo style={{ padding: "8px 0px 0px" }}>
-                        <BasicInfoTitle>
-                            기본 정보
-                        </BasicInfoTitle>
-                            <BasicInfoAndDesc>
-                                <BasicInfo>
-                                {movie_list.originalName}
-                                    <br />
-                                    <span>{movie_list.year} • {movie_list.genre} • {movie_list.country}</span>
-                                    <br />
-                                    <span>{movie_list.duration} · {movie_list.age}</span>
-                                </BasicInfo>
-
-                                <Description>
-                                    {movie_list.description}
-                                </Description>
+                    <DetailInfo style={{padding: "8px 0px 0px"}}>
+                        <div className="BasicInfoTitle"> 
+                            기본정보
+                        </div>
+                        <BasicInfoAndDesc>
+                            <BasicInfo>
+                                {moviePostId.OriginalName}
+                                <br />
+                                <span>{moviePostId.year} • {moviePostId.genre} • {moviePostId.country}</span>
+                                <br />
+                                <span>{moviePostId.duration} · {moviePostId.age}</span>
+                            </BasicInfo>
+                            <Description>
+                                {moviePostId.description}    
+                            </Description>
                         </BasicInfoAndDesc>
                     </DetailInfo>
                     <hr style={{ border: "0", borderBottom: "1px solid #f0f0f0", margin: "24px 20px 0 20px" }} />
                     <CreditWrap>
-                    <Credit />  
+                        {/* <Credit />   */}
                     </CreditWrap>
                     <br />
                     <hr style={{ border: "0", borderBottom: "1px solid #f0f0f0", margin: "24px 20px 0 20px" }} />
-
-                    <CommentList/>
-                
+                    {/* <CommentList/> */}
                 </LeftContent>
 
                 <RightGalleryAndTrailer>
-                <GalleryTrailer />
+                {/* <GalleryTrailer /> */}
                 </RightGalleryAndTrailer>
             </ContainerInner>
         </MovieInfoContainer>
-    );
-
+    )
 }
 const MovieInfoContainer = styled.div`
 padding: 28px 0px 48px;
@@ -74,23 +60,31 @@ display: table;
 `
 
 const DetailInfo = styled.div`
+    .BasicInfoTitle{
+        color: black;
+        font-size: 25px;
+        font-weight: 900;
+        letter-spacing: -0.7px;
+        line-height: 28px;
+        margin: 8px 0px;
+        margin-block-start: 0.83em;
+        margin-block-end: 0.83em;
+        margin-inline-start: 10px;
+        margin-inline-end: 0px;
 
-
-
+    }
 `
+
 const LeftContent = styled.div`
 width: 640px;
 padding: 0px 8px;
 display: table-cell
 border: 1px solid;
 border-radius: 6px;
-background: rgb(255, 255, 255);
 overflow: hidden;
 border-color: rgb(227, 227, 227) !important;
 text-align: left;
 height: 165vh;
-
-
 `
 
 const BasicInfoAndDesc = styled.div`
@@ -138,10 +132,6 @@ letter-spacing: -0.2px;
 `
 
 const CreditWrap = styled.div`
-// border: 1px solid;
-// border-radius: 6px;
-// border-color: rgb(227, 227, 227)
-
 `
 
 
@@ -156,8 +146,4 @@ padding: 0px 8px;
 display: table-cell
 
 `
-
-
-
-
 export default MovieInfoComment;

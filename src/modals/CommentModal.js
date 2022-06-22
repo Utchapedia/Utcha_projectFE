@@ -1,24 +1,25 @@
 import {React, useState, useRef} from 'react'
 import styled from 'styled-components'
-import Form from 'react-bootstrap/Form';
-
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import {useParams} from "react-router-dom";
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import {createMyComment} from '../redux/modules/commentModule'
+// import { propTypes } from 'react-bootstrap/esm/Image';
 
 const CommentModal =({show, onHide}) => {
     const param = useParams();    
     const inputComment = useRef();
     const[comment, setComment] = useState("");
-    const movie_list = useSelector((state) => state.movieList.list);
+   
     const dispatch = useDispatch();
-    
+    const moviePostId = useSelector((state)=>state.detail.list)
+   
     const createComment = () => { 
-        dispatch(createMyComment(inputComment.current.value))
+        // dispatch(createMyComment(inputComment.current.value))
         
       };
     return(
@@ -31,24 +32,21 @@ const CommentModal =({show, onHide}) => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          {movie_list.title}
+          {moviePostId.title}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
-    
-        <Form.Group className="mb-3">
-            <Form.Control type="text" placeholder="의견을 자유롭게 남겨줘용" ref={inputComment} />
-        </Form.Group>
- 
+          <Form.Group className="mb-3">
+              <Form.Control type="text" placeholder="의견을 자유롭게 남겨줘용" ref={inputComment} />
+          </Form.Group>
         </Form>
       </Modal.Body>
 
       <Modal.Footer>
       <Button variant="primary" type="button" 
-        onClick={
-          createComment
-        }>
+        onClick={()=>{createComment()}}
+        >
         저장</Button>
       
       </Modal.Footer>
