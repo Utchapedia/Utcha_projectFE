@@ -67,12 +67,18 @@ const MovieInfoComment = ({ movie_id }) => {
 const MovieInfoContainer = styled.div`
   padding: 28px 0px 48px;
   overflow: hidden;
+  background-color: #ddd;
+  margin-top: 30px;
 `;
 
 const ContainerInner = styled.div`
   max-width: 976px;
   margin: 0px auto;
+  
   display: table;
+  background-color: #fff;
+
+
 `;
 
 const DetailInfo = styled.div`
@@ -99,7 +105,10 @@ border-radius: 6px;
 overflow: hidden;
 border-color: rgb(227, 227, 227) !important;
 text-align: left;
-height: 165vh;
+height: 120vh;
+border: 1px solid;
+border-radius: 6px;
+
 `;
 
 const BasicInfoAndDesc = styled.div`
@@ -108,21 +117,8 @@ const BasicInfoAndDesc = styled.div`
   font-weight: 400;
   letter-spacing: -0.2px;
   line-height: 24px;
-  margin: 8px 10px;
-`;
+  margin: 8px 10px;`
 
-const BasicInfoTitle = styled.div`
-  color: black;
-  font-size: 25px;
-  font-weight: 900;
-  letter-spacing: -0.7px;
-  line-height: 28px;
-  margin: 8px 0px;
-  margin-block-start: 0.83em;
-  margin-block-end: 0.83em;
-  margin-inline-start: 10px;
-  margin-inline-end: 0px;
-`;
 const BasicInfo = styled.div`
   color: rgb(74, 74, 74);
   font-size: 15px;
@@ -149,6 +145,7 @@ const RightGalleryAndTrailer = styled.div`
   border: 1px solid;
   border-radius: 6px;
   background: rgb(255, 255, 255);
+  
   overflow: hidden;
   border-color: rgb(227, 227, 227) !important;
   max-width: 300px;

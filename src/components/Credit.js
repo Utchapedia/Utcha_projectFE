@@ -52,7 +52,10 @@ const Credit = (props) => {
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
   `
-  const CreditTwoSet = styled.div``
+  const CreditTwoSet = styled.div`
+  margin-left: 10px;
+  margin-bottom: 10px;
+  `
   const FirstGroup = styled.div`
   float: left;
   width: 50%;

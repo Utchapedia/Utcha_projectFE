@@ -12,25 +12,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { Button, Form, Container } from 'react-bootstrap';
 
-
 import { LoadCommentDB, loadComments } from '../redux/modules/commentModule';
 import { loadMovieListDB } from '../redux/modules/movieList';
 
 const CommentList = () => {
 const comment_list = useSelector((state) => state.commentModule.list);
+console.log(comment_list)
   const params = useParams();
   const movie_id = params.movie_id;
   const dispatch = useDispatch();
   
   
-  useEffect(()=>{
-    dispatch(LoadCommentDB(movie_id));
-  },[]);
+  // useEffect(()=>{
+  //   dispatch(LoadCommentDB(movie_id));
+  // },[]);
   
   return (
-    <>
-    <CommentContainer>
-      <CommentTitle>코멘트</CommentTitle>
+    <div style={{marginTop: "10px"}}>
+    <CommentContainer >
+      <CommentTitle >
+        
+        코멘트</CommentTitle>
 
       <Swiper
         slidesPerView={2}
@@ -71,7 +73,7 @@ const comment_list = useSelector((state) => state.commentModule.list);
                 <BottomComment>
                   <div className="LikeBtn">
                   <FontAwesomeIcon icon={faThumbsUp} style={{width:'20', height:'18'}}/>
-                  <span> 3397</span>
+                  <span> 1</span>
                   </div>
                 </BottomComment>
                 </CommentBox>   
@@ -84,7 +86,7 @@ const comment_list = useSelector((state) => state.commentModule.list);
         <div class='swiper-button-next'></div> */}
       </Swiper>
     </CommentContainer>
-    </>
+    </div>
   );
 };
 
@@ -93,10 +95,13 @@ const CommentTitle = styled.div`
   font-weight: 700;
   letter-spacing: -0.7px;
   line-height: 28px;
-  // margin-block-start: 0.83em;
-  // margin-block-end: 0.83em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  
 `;
 const CommentContainer = styled.div`
+margin-top: 10px;
+transform: translate(1%, 20%);
 `;
 
 const Comment = styled.div`

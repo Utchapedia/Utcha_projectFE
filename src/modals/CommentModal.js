@@ -56,7 +56,7 @@ const CommentModal = ({ show, onHide, movie_id }) => {
                 ref={inputComment}
                 value={comment}
                 onChange={(e) => setComment(inputComment.current?.value)}
-                placeholder='의견을 자유롭게 남겨줘용'
+                placeholder='의견을 자유롭게 남겨주세요'
               />
             </Form.Group>
           </Form>
