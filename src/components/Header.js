@@ -118,7 +118,7 @@ const SearchBar = styled.div`
     height: 25px;
 
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 300;
     letter-spacing: -0.3px;
 
     cursor: text;

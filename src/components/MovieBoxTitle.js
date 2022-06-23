@@ -12,10 +12,9 @@ const MovieBoxTitle = ({ title }) => {
 
 const Container = styled.div`
   width: 100%;
-  margin-bottom: 10px;
 
   p {
-    margin: 0;
+    margin-bottom: 10px;
     font-size: 22px;
     font-weight: 700;
   }

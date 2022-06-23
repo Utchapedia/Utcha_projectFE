@@ -61,7 +61,7 @@ const SignUpModal = ({ show, onHide }) => {
       <Container>
         <Top>
           <img src={logo} style={{ width: '200px', height: 'auto' }} alt='logo' />
-          <h2>로그인</h2>
+          <h2>회원가입</h2>
         </Top>
 
         <Modal.Body>
@@ -84,7 +84,7 @@ const SignUpModal = ({ show, onHide }) => {
               <button disabled>로그인</button>
             </SignUpArea>
 
-            <HorizontalLine text={'OR'} />
+            {/* <HorizontalLine text={'OR'} /> */}
           </Form>
         </Modal.Body>
       </Container>
@@ -117,7 +117,7 @@ const ModalStyled = styled(Modal)`
     padding: 0 15px;
 
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 400;
     line-height: 21px;
 
     caret-color: #ff2f6e;
@@ -171,19 +171,6 @@ const Top = styled.div`
   }
 `;
 
-const Tip = styled.div`
-  background-color: #f7f7f7;
-  color: #8c8c8c;
-
-  font-size: 15px;
-  font-weight: 400;
-  letter-spacing: -0.2px;
-  line-height: 23px;
-  text-align: center;
-  padding: 10px 13px;
-  margin-top: 48px;
-`;
-
 const SignUpArea = styled.div`
   font-size: 15px;
   font-weight: 400;
@@ -192,7 +179,7 @@ const SignUpArea = styled.div`
   color: rgb(140, 140, 140);
   text-align: center;
 
-  margin-top: 10px;
+  margin: 20px 0;
 
   button {
     background-color: transparent;
