@@ -1,76 +1,45 @@
 import React from "react";
-import styled from "styled-components";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
+import styled, {useRef, useState} from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination, Virtual } from 'swiper';
+import "swiper/css";
+import '../css/total.css';
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Box } from "@mui/system";
 
+const GalleryTrailer = ({moviePostId}) => {
 
-const GalleryTrailer = (props) => {
-  const movie_list = useSelector((state) => state.movieList.list);
-
-    const settings = {    
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        
-      };
-    
+  //console.log(moviePostId.galleryUrls[0])
 return(
-    <GalleryTrailerWrap>
-        <GalleryWrap>    
-        <GalleryTitle>
-        갤러리
-        </GalleryTitle>
-        <div style={{ position: "relative", transform: "translate3d(0,0,0)" }}>
-        <ImageWrap>
-        <Slider {...settings} >
+  <>
+    <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+        <SwiperSlide>Slide 1</SwiperSlide>
+          {/* <div className="box" style={{ backgroundImage: `url(${moviePostId.galleryUrls[0]})` }}></div> */}
+
+        <SwiperSlide>Slide 2</SwiperSlide>
         
-          <Div style={{display : 'block'}}>
-            <Img1 style={{backgroundImage: `url(${movie_list.galleryUrls[0]})` }} />
-          </Div>
-          <Div>
-          <Img2 style={{backgroundImage: `url(${movie_list.galleryUrls[1]})` }} />
-          </Div>
-          
-          <Div>
-          <Img3 style={{backgroundImage: `url(${movie_list.galleryUrls[2]})` }} />
-          </Div>
-          <Div>
-          <Img4 style={{backgroundImage: `url(${movie_list.galleryUrls[3]})` }} />
-          </Div>
+      </Swiper>
+    
+  </>
+     );
 
-        </Slider>
-        </ImageWrap>
-        </div>
-        </GalleryWrap>
-       
 
-<hr style={{ border: "0", borderBottom: "1px solid #f0f0f0", margin: "24px 20px 0 20px" }} />
-        <TrailerWrap>    
-        <TrailerTitle>
-        동영상
-        </TrailerTitle>
-        <Slider {...settings}>
-          <div className="img1">
-            <Trailer1 >
-              <Link to ="{movie_list.videoUrls[0]}">  1 </Link></Trailer1>
-          </div>
-          <div>
-            <Trailer2>2</Trailer2>
-          </div>
-
-        </Slider>
-        </TrailerWrap>
+const Box = styled.div`
+ width: 80px;
+ height: 50px;
+ background-color: #ddd
+`;
+const Gallery= styled.div`
+  
+`;
 
 
 
-    </GalleryTrailerWrap>
-    )
-}
+
+
 
 
 
@@ -144,7 +113,7 @@ width: 200px;
 height: 110px;
 background-color: skyblue;
 `
-
+}
 
 
 

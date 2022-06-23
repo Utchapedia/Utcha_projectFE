@@ -1,4 +1,4 @@
-import { React, useState, useRef } from 'react';
+import { React, useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -23,9 +23,18 @@ const CommentModal = ({ show, onHide, movie_id }) => {
   const addComment = inputComment.current;
   //console.log(movie_id)
 
+  
   const createComment = () => {
     dispatch(CreateCommentDB(inputComment.current.value, username, movie_id));
   };
+
+  // useEffect(()=>{
+  //   dispatch(CreateCommentDB(param.movie_id));
+    
+  // },[])
+
+
+
 
   return (
     <Modal

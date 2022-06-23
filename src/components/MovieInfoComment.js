@@ -7,21 +7,21 @@ import GalleryTrailer from './GalleryTrailer';
 import Credit from './Credit';
 import CommentList from './CommentList';
 import { LoadCommentDB, loadComments } from '../redux/modules/commentModule';
+import { loadMovieListDB } from '../redux/modules/movieList';
 
 const MovieInfoComment = ({ movie_id }) => {
   const moviePostId = useSelector((state) => state.detail.list);
   const dispatch = useDispatch();
 
   console.log(movie_id);
-
+  
   const comment_list = useSelector((state) => state.commentModule.list);
-  console.log(comment_list);
-
-  React.useEffect(() => {
-    dispatch(LoadCommentDB(movie_id));
-    dispatch(loadComments(movie_id));
-  }, []);
-
+  //console.log(comment_list);
+  // React.useEffect(() => {
+  //   dispatch(loadMovieListDB(movie_id));
+  //   dispatch(loadComments(movie_id));
+  // }, []);
+//console.log(moviePostId.galleryUrls)
   return (
     <MovieInfoContainer>
       <ContainerInner>
@@ -55,8 +55,11 @@ const MovieInfoComment = ({ movie_id }) => {
           />
           <CommentList comment_list={comment_list} />
         </LeftContent>
-
-        <RightGalleryAndTrailer>{/* <GalleryTrailer /> */}</RightGalleryAndTrailer>
+        
+        <RightGalleryAndTrailer>
+          <GalleryTrailer {...moviePostId}/>
+          
+        </RightGalleryAndTrailer>
       </ContainerInner>
     </MovieInfoContainer>
   );
