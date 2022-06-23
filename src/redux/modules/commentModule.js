@@ -8,7 +8,22 @@ const UPDATE = 'commentModule/UPDATE';
 const DELETE = 'commentModule/DELETE';
 
 const initialState = {
-  list: [],
+  list: [
+    {
+    movieId: 3,
+    commandId : 0,
+    comment: "재미있어요!",
+    nickName: "사과"
+  },
+  {
+    movieId: 3,
+    commandId : 1,
+    comment: "두 번 봤어요!! 짱잼임!!",
+    nickName: "바나나"
+  }
+
+
+],
 };
 
 // Action Creators

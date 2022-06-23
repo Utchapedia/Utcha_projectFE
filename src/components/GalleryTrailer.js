@@ -1,93 +1,110 @@
-import React from "react";
+import React,  {useRef, useState, useEffect}  from "react";
 import styled from "styled-components";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
 import { useDispatch, useSelector } from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination, Virtual } from 'swiper';
+import {loadMovieListDB} from '../redux/modules/movieList'
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Box } from "@mui/system";
+
+const GalleryTrailer = () => {
+const dispatch=useDispatch();
+const param = useParams()
+  // console.log(props.galleryUrls)
+
+  const moviePostId = useSelector((state) => state.detail.list);
+
+// useEffect(()=>{
+//   moviePostId.length>1 && dispatch(loadMovieListDB(param.movie_id));
+  
+// }, [])
 
 
-const GalleryTrailer = (props) => {
-  const movie_list = useSelector((state) => state.movieList.list);
+const imgList= moviePostId
+console.log(imgList)
 
-    const settings = {    
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        
-      };
-    
 return(
-    <GalleryTrailerWrap>
-        <GalleryWrap>    
-        <GalleryTitle>
-        갤러리
-        </GalleryTitle>
-        <div style={{ position: "relative", transform: "translate3d(0,0,0)" }}>
-        <ImageWrap>
-        <Slider {...settings} >
-        
-          <Div style={{display : 'block'}}>
-            <Img1 style={{backgroundImage: `url(${movie_list.galleryUrls[0]})` }} />
-          </Div>
-          <Div>
-          <Img2 style={{backgroundImage: `url(${movie_list.galleryUrls[1]})` }} />
-          </Div>
-          
-          <Div>
-          <Img3 style={{backgroundImage: `url(${movie_list.galleryUrls[2]})` }} />
-          </Div>
-          <Div>
-          <Img4 style={{backgroundImage: `url(${movie_list.galleryUrls[3]})` }} />
-          </Div>
-
-        </Slider>
-        </ImageWrap>
+  <div>
+    <GalleryTitle>
+      갤러리
+    </GalleryTitle>
+    <Gallery>
+      <StyledSwiper
+        slidesPerView={2}
+        spaceBetween={10}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Pagination]}
+        className="mySwiper"
+      >
+        <SwiperSlide>
+          <div className="galleryImg">
+            <img src="https://an2-img.amz.wtchn.net/image/v2/UOcFw-BDSh-yoR0gmc35tQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1KbklsMHNJbkFpT2lJdmRqSXZjM1J2Y21VdmFXMWhaMlV2TVRZek9EYzNPVFEwTURrNE5EWTRNRFV3TWlJc0luRWlPamd3TENKM0lqb3hPVEl3ZlEucGhzVmxHWFNxNmF5bmYwVDUzYUJDRU41MExXcUVUSGhOc3NwNldQbWFwVQ" alt='galleryImg' />
+          </div>
+          </SwiperSlide>
+        <SwiperSlide>
+        <div className="galleryImg">
+          <img src="https://an2-img.amz.wtchn.net/image/v2/Z8jafJT0TOkoU1C0Z5xo_Q.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1KbklsMHNJbkFpT2lJdmRqSXZjM1J2Y21VdmFXMWhaMlV2TVRZMU16ZzRPVFUyTmpRM09UVXlPVFV5T0NJc0luRWlPamd3TENKM0lqb3hPVEl3ZlEuU0FCTjdoeVIxbVZ6bDRoZjdTeE5mUFZXNzhuZ204d3NaOW5FNzRTQWhfaw" alt='galleryImg' />
         </div>
-        </GalleryWrap>
-       
-
-<hr style={{ border: "0", borderBottom: "1px solid #f0f0f0", margin: "24px 20px 0 20px" }} />
-        <TrailerWrap>    
-        <TrailerTitle>
-        동영상
-        </TrailerTitle>
-        <Slider {...settings}>
-          <div className="img1">
-            <Trailer1 >
-              <Link to ="{movie_list.videoUrls[0]}">  1 </Link></Trailer1>
+        </SwiperSlide>
+        <SwiperSlide>
+        <div className="galleryImg">
+          <img src="https://an2-img.amz.wtchn.net/image/v2/sebA6lArfqpQN7FZYY9Whg.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1KbklsMHNJbkFpT2lJdmRqSXZjM1J2Y21VdmFXMWhaMlV2TVRZMU16ZzRPVFUyTmpVNU9ERXhOVE16TmlJc0luRWlPamd3TENKM0lqb3hPVEl3ZlEuMzJZX2lFaW1QQVlkVmx6d0dOSDVGeWtCNFhSY0JLa2N4YWRMR2kxSGM4TQ" alt='galleryImg' />
+        </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="galleryImg"> 
+            <img src="https://an2-img.amz.wtchn.net/image/v2/bA5nxr-gHvq5oAq1ttw6VQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1KbklsMHNJbkFpT2lJdmRqSXZjM1J2Y21VdmFXMWhaMlV2TVRZMU16ZzRPVFUyTmpVek16TXhOakU1T1NJc0luRWlPamd3TENKM0lqb3hPVEl3ZlEuQ215YjRtbUlTdEdaTDBhY1BGeDdEWkpmQTBaWXN6MFhySUlULVBEX0lXdw" alt='galleryImg' />
           </div>
-          <div>
-            <Trailer2>2</Trailer2>
-          </div>
-
-        </Slider>
-        </TrailerWrap>
-
-
-
-    </GalleryTrailerWrap>
-    )
+        </SwiperSlide>
+      
+      </StyledSwiper>
+      </Gallery>
+</div>
+     );
 }
+const StyledSwiper = styled(Swiper)`
+  position: relative;
+  width: 100%;
+  height: auto;
+`;
 
-
-
-const GalleryTrailerWrap = styled.div`
-`
-const GalleryWrap=styled.div`
-margin-bottom: 50px;
-
-`
+// const Box = styled.div`
+//  width: 80px;
+//  height: 50px;
+//  background-color: #ddd
+// `;
 const GalleryTitle = styled.div`
-font-size: 19px;
+font-size: 25px;
 font-weight: 700;
 letter-spacing: -0.7px;
 line-height: 28px;
 margin-block-start: 0.83em;
 margin-block-end: 0.83em;
 `
+const Gallery= styled.div`
+img {
+  width: 100%;
+  height: 80px;
+  border-radius: 5px;
+}
+`;
+
+const GalleryTrailerWrap = styled.div`
+`
+const ImgOne=styled.div`
+width: 150px;
+height: 80px;
+`
+
+const GalleryWrap=styled.div`
+margin-bottom: 50px;
+
+`
+
 
 const ImageWrap = styled.div`
 margin-bottom: 50px`

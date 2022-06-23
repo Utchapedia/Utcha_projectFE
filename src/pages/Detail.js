@@ -23,7 +23,7 @@ const Detail = (props) => {
 
   return (
     <Container>
-      <div>{movieIdPost.title}</div>
+     
       <Banner movie_id={movie_id} />
       <MovieInfoComment movie_id={movie_id} />
     </Container>
